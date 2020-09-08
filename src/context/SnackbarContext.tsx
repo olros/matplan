@@ -5,7 +5,7 @@ type ContextProps = {
   showSnackbar: (title: string, options?: Record<string, unknown>) => void;
 };
 
-const SnackbarContext = createContext<Partial<ContextProps>>({});
+const SnackbarContext = createContext<ContextProps | undefined>(undefined);
 
 const SnackbarProvider = ({ children }: { children: ReactNode }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -37,4 +37,4 @@ const useSnackbar = () => {
 };
 
 export default useSnackbar;
-export { SnackbarProvider };
+export { SnackbarProvider, useSnackbar };

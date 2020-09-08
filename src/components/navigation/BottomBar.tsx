@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import PlanIcon from '@material-ui/icons/ViewDayOutlined';
 import ExpensesIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import RecipesIcon from '@material-ui/icons/FastfoodRounded';
+import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -71,6 +72,14 @@ const BottomBar = () => {
             label='Oppskrifter'
             to={URLS.recipes}
             value={URLS.recipes}
+          />
+          <BottomNavigationAction
+            classes={{ root: classes.action, selected: classes.selected }}
+            component={Link}
+            icon={<AccountIcon />}
+            label='Bruker'
+            to={URLS.profile}
+            value={URLS.profile}
           />
         </BottomNavigation>
       </Paper>

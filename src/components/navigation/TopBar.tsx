@@ -1,13 +1,11 @@
 import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import URLS from '../../URLS';
-import { useAuth } from '../../hooks/Auth';
 
 // Material UI Components
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 
 // Icons
 import ExpensesIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
@@ -85,7 +83,6 @@ const URIbutton = ({ data }: URIButtonProps) => {
 
 function NavBar() {
   const classes = useStyles();
-  const [auth, isLoading] = useAuth();
 
   return (
     <>
@@ -97,9 +94,16 @@ function NavBar() {
         </div>
 
         <div>
-          <IconButton className={classes.menuButton} component={Link} to={!isLoading && auth ? URLS.profile : URLS.sign_in}>
-            <AccountIcon />
-          </IconButton>
+          <Button
+            className={classes.button}
+            color='secondary'
+            component={Link}
+            endIcon={<AccountIcon />}
+            onClick={() => (URLS.profile === window.location.pathname ? window.location.reload() : {})}
+            to={URLS.profile}
+            variant={window.location.pathname === URLS.profile ? 'contained' : 'text'}>
+            Bruker
+          </Button>
         </div>
       </div>
       <Toolbar className={classes.navContent} disableGutters />

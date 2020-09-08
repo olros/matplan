@@ -4,14 +4,14 @@ import 'firebase/analytics';
 import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
+  apiKey: 'AIzaSyC5qznf0RxNbKdHRdQKW2KRh5aIW-QWuZ4',
+  authDomain: 'matplan-2020.firebaseapp.com',
+  databaseURL: 'https://matplan-2020.firebaseio.com',
+  projectId: 'matplan-2020',
+  storageBucket: 'matplan-2020.appspot.com',
+  messagingSenderId: '87654811544',
+  appId: '1:87654811544:web:979de2cd6a0e817a950ded',
+  measurementId: 'G-2WXW795XVL',
 };
 let analytics;
 if (!firebase.apps.length) {
