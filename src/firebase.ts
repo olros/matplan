@@ -19,6 +19,6 @@ if (!firebase.apps.length) {
   analytics = firebase.analytics();
 }
 const db = firebase.firestore();
-const auth = firebase.auth();
-export { db, auth, analytics };
+const fbAuth = firebase.auth();
+export { db, fbAuth, analytics };
 export default firebase;

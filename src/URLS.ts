@@ -1,9 +1,7 @@
 export default {
-  landing: '/',
-  sign_in: '/logg-inn/',
   profile: '/profil/',
 
-  plan: '/plan/',
+  plan: '/',
   expenses: '/utgifter/',
   recipes: '/oppskrifter/',
 };

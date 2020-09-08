@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import URLS from './URLS';
-import firebase, { auth } from './firebase';
+import firebase, { fbAuth } from './firebase';
 import { SnackbarProvider } from './context/SnackbarContext';
 
 // Theme
@@ -38,7 +38,7 @@ const Application = () => {
   //   theme: { get: theme, set: updateTheme },
   // };
 
-  console.log(auth.currentUser);
+  console.log(fbAuth.currentUser);
 
   // useEffect(() => {
   //   if (!auth.currentUser) {
@@ -83,7 +83,7 @@ const Application = () => {
       <SnackbarProvider>
         <BrowserRouter>
           <Routes>
-            <Route element={<Landing />} path={URLS.landing} />
+            <Route element={<Landing />} path={URLS.plan} />
             <Route element={<Profile />} path={URLS.profile} />
           </Routes>
         </BrowserRouter>

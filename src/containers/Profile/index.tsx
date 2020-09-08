@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import firebase, { auth } from '../../firebase';
+import firebase, { fbAuth } from '../../firebase';
 import { useAuth } from '../../hooks/Auth';
 import { useSnackbar } from '../../context/SnackbarContext';
 
@@ -30,23 +30,33 @@ const Profile = () => {
   const [isLogIn, setIsLogIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const a = auth as firebase.User;
   const signUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const credential = firebase.auth.EmailAuthProvider.credential(email, password);
-    console.log(credential);
-    showSnackbar('hmm');
+    auth
+      .linkWithCredential(credential)
+      .then(() => {
+        showSnackbar('Brukeren ble opprettet og arbeidet ditt knyttet til den');
+        setIsLogIn(true);
+      })
+      .catch((error) => {
+        showSnackbar(error.message);
+      });
   };
 
   const logIn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    firebase
-      .auth()
+    fbAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
+        showSnackbar('Logget inn');
       })
       .catch((error) => showSnackbar(error.code + ' - ' + error.message));
+  };
+
+  const signOut = () => {
+    fbAuth.signOut();
   };
 
   return (
@@ -55,7 +65,7 @@ const Profile = () => {
         <Root>
           <Typography variant='h1'>Profil</Typography>
           <Paper className={classes.paper}>
-            {a.isAnonymous ? (
+            {auth.isAnonymous ? (
               <form onSubmit={isLogIn ? logIn : signUp}>
                 <Typography variant='h2'>{isLogIn ? 'Logg inn' : 'Opprett bruker'}</Typography>
                 <Typography variant='h4'>
@@ -90,7 +100,12 @@ const Profile = () => {
                 </Button>
               </form>
             ) : (
-              <Typography variant='h2'>Du er logget inn med: {a.email}</Typography>
+              <>
+                <Typography variant='h2'>Du er logget inn med: {auth.email}</Typography>
+                <Button className={classes.field} color='primary' fullWidth onClick={signOut} variant='outlined'>
+                  Logg ut
+                </Button>
+              </>
             )}
           </Paper>
         </Root>

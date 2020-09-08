@@ -1,26 +1,24 @@
 import { useState, useEffect } from 'react';
-import { auth } from '../firebase';
+import { fbAuth } from '../firebase';
 
 export const useAuth = () => {
-  const [state, setState] = useState<firebase.User | null>(auth.currentUser);
-  const [isLoading, setIsLoading] = useState<boolean>(!auth.currentUser);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const [state, setState] = useState<firebase.User>(fbAuth.currentUser!);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log(user);
+    const unsubscribe = fbAuth.onAuthStateChanged((user) => {
       if (user) {
         setState(user);
+        console.log(user.uid);
       } else {
-        auth.signInAnonymously().catch((error) => {
-          console.log(error.code, error.message);
-        });
+        fbAuth.signInAnonymously();
+        console.log('Sign in anonymous');
       }
       setIsLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
-  return [state, isLoading];
+  return [state, isLoading] as const;
 };
-
-export default useAuth;
