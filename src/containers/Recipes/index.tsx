@@ -17,16 +17,16 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Plan = () => {
+const Recipes = () => {
   const classes = useStyles();
   const [auth, isLoading] = useAuth();
 
   return (
     <Navigation footer isLoading={Boolean(isLoading)}>
       <Root>
-        <Typography variant='h1'>Matplan</Typography>
+        <Typography variant='h1'>Oppskrifter</Typography>
         <Paper className={classes.paper} outlined>
-          <Typography variant='h2'>Her kommer Matplan</Typography>
+          <Typography variant='h2'>Her kommer oppskrifter</Typography>
           {auth && <Typography variant='h4'></Typography>}
         </Paper>
       </Root>
@@ -34,4 +34,4 @@ const Plan = () => {
   );
 };
 
-export default Plan;
+export default Recipes;

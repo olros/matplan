@@ -7,7 +7,7 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const unsubscribe = fbAuth.onAuthStateChanged((newUser) => {
+    const unsubscribe = fbAuth.onAuthStateChanged((newUser: firebase.User | null) => {
       newUser ? setUser(newUser) : fbAuth.signInAnonymously();
       setIsLoading(false);
     });

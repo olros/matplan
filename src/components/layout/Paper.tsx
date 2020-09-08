@@ -22,13 +22,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   children: ReactNode;
   className?: string;
+  outlined?: boolean;
 }
 
-function Paper({ children, className }: Props) {
+function Paper({ children, className, outlined }: Props) {
   const classes = useStyles();
 
   return (
-    <MaterialPaper className={classnames(classes.paper, className && className)} elevation={2}>
+    <MaterialPaper className={classnames(classes.paper, className && className)} elevation={2} variant={outlined ? 'outlined' : 'elevation'}>
       {children}
     </MaterialPaper>
   );

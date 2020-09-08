@@ -63,7 +63,7 @@ const Profile = () => {
       {auth && (
         <Root>
           <Typography variant='h1'>Profil</Typography>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper} outlined>
             {auth.isAnonymous ? (
               <form onSubmit={isLogIn ? logIn : signUp}>
                 <Typography variant='h2'>{isLogIn ? 'Logg inn' : 'Opprett bruker'}</Typography>

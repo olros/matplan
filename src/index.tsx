@@ -11,8 +11,10 @@ import { darkTheme } from './theme';
 import './assets/css/index.css';
 
 // Project containers
+import Expenses from 'containers/Expenses';
 import Plan from 'containers/Plan';
 import Profile from 'containers/Profile';
+import Recipes from 'containers/Recipes';
 
 const Application = () => {
   // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -42,8 +44,10 @@ const Application = () => {
       <SnackbarProvider>
         <BrowserRouter>
           <Routes>
+            <Route element={<Expenses />} path={URLS.expenses} />
             <Route element={<Plan />} path={URLS.plan} />
             <Route element={<Profile />} path={URLS.profile} />
+            <Route element={<Recipes />} path={URLS.recipes} />
           </Routes>
         </BrowserRouter>
       </SnackbarProvider>

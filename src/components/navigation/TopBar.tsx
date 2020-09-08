@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import URLS from 'URLS';
+import { useAuth } from 'hooks/Auth';
 
 // Material UI Components
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -53,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     marginRight: 5,
     marginLeft: 5,
-    padding: 15,
+    padding: '10px 20px',
+    whiteSpace: 'nowrap',
   },
 }));
 
@@ -70,12 +72,12 @@ const URIbutton = ({ data }: URIButtonProps) => {
   return (
     <Button
       className={classes.button}
-      color='secondary'
+      color={window.location.pathname === data.link ? 'primary' : 'secondary'}
       component={Link}
       onClick={() => (data.link === window.location.pathname ? window.location.reload() : {})}
       startIcon={data.icon}
       to={data.link}
-      variant={window.location.pathname === data.link ? 'contained' : 'text'}>
+      variant={window.location.pathname === data.link ? 'contained' : 'outlined'}>
       {data.text}
     </Button>
   );
@@ -83,6 +85,7 @@ const URIbutton = ({ data }: URIButtonProps) => {
 
 function NavBar() {
   const classes = useStyles();
+  const [auth, isLoading] = useAuth();
 
   return (
     <>
@@ -93,18 +96,7 @@ function NavBar() {
           <URIbutton data={{ link: URLS.recipes, text: 'Oppskrifter', icon: <RecipesIcon /> }} />
         </div>
 
-        <div>
-          <Button
-            className={classes.button}
-            color='secondary'
-            component={Link}
-            endIcon={<AccountIcon />}
-            onClick={() => (URLS.profile === window.location.pathname ? window.location.reload() : {})}
-            to={URLS.profile}
-            variant={window.location.pathname === URLS.profile ? 'contained' : 'text'}>
-            Bruker
-          </Button>
-        </div>
+        <URIbutton data={{ link: URLS.profile, text: !isLoading && !auth.isAnonymous ? 'Profil' : 'Logg inn', icon: <AccountIcon /> }} />
       </div>
       <Toolbar className={classes.navContent} disableGutters />
     </>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import URLS from 'URLS';
+import { useAuth } from 'hooks/Auth';
 
 // Material UI Components
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const BottomBar = () => {
   const classes = useStyles();
+  const [auth, isLoading] = useAuth();
   const [tab, setTab] = useState(window.location.pathname);
   return (
     <>
@@ -77,7 +79,7 @@ const BottomBar = () => {
             classes={{ root: classes.action, selected: classes.selected }}
             component={Link}
             icon={<AccountIcon />}
-            label='Bruker'
+            label={!isLoading && !auth.isAnonymous ? 'Profil' : 'Logg inn'}
             to={URLS.profile}
             value={URLS.profile}
           />
