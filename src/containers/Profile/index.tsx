@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import firebase, { fbAuth } from '../../firebase';
-import { useAuth } from '../../hooks/Auth';
-import { useSnackbar } from '../../context/SnackbarContext';
+import { useAuth } from 'hooks/Auth';
+import { useSnackbar } from 'context/SnackbarContext';
 
 // Material UI Components
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 // Project components
 import Paper from 'components/layout/Paper';
 import Root from 'components/layout/Root';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from 'components/navigation/Navigation';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   paper: {
     marginTop: 20,
   },
@@ -48,8 +48,7 @@ const Profile = () => {
     e.preventDefault();
     fbAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
         showSnackbar('Logget inn');
       })
       .catch((error) => showSnackbar(error.code + ' - ' + error.message));

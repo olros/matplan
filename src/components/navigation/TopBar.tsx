@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import URLS from '../../URLS';
+import URLS from 'URLS';
 
 // Material UI Components
 import { makeStyles, Theme } from '@material-ui/core/styles';

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import URLS from './URLS';
-import firebase, { fbAuth } from './firebase';
+import URLS from 'URLS';
 import { SnackbarProvider } from './context/SnackbarContext';
 
 // Theme
@@ -12,7 +11,7 @@ import { darkTheme } from './theme';
 import './assets/css/index.css';
 
 // Project containers
-import Landing from 'containers/Landing';
+import Plan from 'containers/Plan';
 import Profile from 'containers/Profile';
 
 const Application = () => {
@@ -38,52 +37,12 @@ const Application = () => {
   //   theme: { get: theme, set: updateTheme },
   // };
 
-  console.log(fbAuth.currentUser);
-
-  // useEffect(() => {
-  //   if (!auth.currentUser) {
-  //     auth.signInAnonymously().catch((error) => {
-  //       console.log(error.code, error.message);
-  //     });
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       const isAnonymous = user.isAnonymous;
-  //       const uid = user.uid;
-  //       console.log(isAnonymous, uid);
-
-  //       const credential = firebase.auth.EmailAuthProvider.credential('olafrosendahl@gmail.com', '123456');
-  //       console.log(credential);
-  //       if (auth.currentUser) {
-  //         console.log(auth.currentUser);
-  //         auth.currentUser
-  //           .linkWithCredential(credential)
-  //           .then(function (usercred) {
-  //             const user = usercred.user;
-  //             console.log('Anonymous account successfully upgraded', user);
-  //           })
-  //           .catch(function (error) {
-  //             console.log('Error upgrading anonymous account', error);
-  //           });
-  //       }
-  //       // ...
-  //     } else {
-  //       // User is signed out.
-  //       // ...
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-
   return (
     <MuiThemeProvider theme={darkTheme}>
       <SnackbarProvider>
         <BrowserRouter>
           <Routes>
-            <Route element={<Landing />} path={URLS.plan} />
+            <Route element={<Plan />} path={URLS.plan} />
             <Route element={<Profile />} path={URLS.profile} />
           </Routes>
         </BrowserRouter>

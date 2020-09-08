@@ -1,6 +1,6 @@
 import React from 'react';
 // import { db } from '../../firebase';
-import { useAuth } from '../../hooks/Auth';
+import { useAuth } from 'hooks/Auth';
 
 // Material UI Components
 import Typography from '@material-ui/core/Typography';
@@ -8,15 +8,15 @@ import Typography from '@material-ui/core/Typography';
 // Project components
 import Paper from 'components/layout/Paper';
 import Root from 'components/layout/Root';
-import Navigation from '../../components/navigation/Navigation';
+import Navigation from 'components/navigation/Navigation';
 
-const Landing = () => {
+const Plan = () => {
   const [auth, isLoading] = useAuth();
 
   return (
     <Navigation footer isLoading={Boolean(isLoading)}>
       <Root>
-        <Typography variant='h1'>Velkommen</Typography>
+        <Typography variant='h1'>Matplan</Typography>
         <Paper>
           <Typography variant='h1'>H1</Typography>
           <Typography variant='h2'>H2</Typography>
@@ -29,4 +29,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Plan;

@@ -1,6 +1,6 @@
 import React from 'react';
 // import { useTranslation } from 'react-i18next';
-// import { languages } from '../../i18n';
+// import { languages } from 'i18n';
 
 // Material UI Components
 import { makeStyles, Theme } from '@material-ui/core/styles';
