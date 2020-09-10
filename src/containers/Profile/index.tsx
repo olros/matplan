@@ -32,16 +32,20 @@ const Profile = () => {
   const [password, setPassword] = useState('');
   const signUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const credential = firebase.auth.EmailAuthProvider.credential(email, password);
-    auth
-      .linkWithCredential(credential)
-      .then(() => {
-        showSnackbar('Brukeren ble opprettet og arbeidet ditt knyttet til den');
-        setIsLogIn(true);
-      })
-      .catch((error) => {
-        showSnackbar(error.message);
-      });
+    if (auth) {
+      const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+      auth
+        .linkWithCredential(credential)
+        .then(() => {
+          showSnackbar('Brukeren ble opprettet og arbeidet ditt knyttet til den');
+          setIsLogIn(true);
+        })
+        .catch((error) => {
+          showSnackbar(error.message);
+        });
+    } else {
+      showSnackbar('Noe gikk galt, last inn siden på nytt og prøv igjen');
+    }
   };
 
   const logIn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) => {

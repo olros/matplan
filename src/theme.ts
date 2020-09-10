@@ -71,7 +71,8 @@ export const darkTheme = createMuiTheme({
     h4: {
       color: '#476282',
       textAlign: 'left',
-      marginBottom: 10,
+      marginTop: 10,
+      marginBottom: 5,
       fontSize: '0.9rem',
     },
   },

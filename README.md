@@ -39,7 +39,7 @@ There is a file called `matplan.code-workspace` with settings which autoformats 
 
 ```
 {
-  "plans (collection - id: uid)": [
+  "plans (collection - docId: uid)": [
     {
       "uid": "string",
       "public": "boolean",
@@ -51,10 +51,10 @@ There is a file called `matplan.code-workspace` with settings which autoformats 
       ]
     }
   ],
-  "expenses (collection - id: uid)": [
+  "expenses (collection - docId: uid)": [
     {
       "uid": "string",
-      "expense_months (collection - id: YYYYMM)": [
+      "expense_months (collection - docId: YYYYMM)": [
         {
           "totalAmount": "number",
           "totalTimes: "number",
@@ -68,7 +68,7 @@ There is a file called `matplan.code-workspace` with settings which autoformats 
       ] 
     }
   ],
-  "recipes (collection - id: random)": [
+  "recipes (collection - docId: random)": [
     {
       "owner": "string (uid)",
       "public": "boolean",

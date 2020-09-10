@@ -79,7 +79,7 @@ const BottomBar = () => {
             classes={{ root: classes.action, selected: classes.selected }}
             component={Link}
             icon={<AccountIcon />}
-            label={!isLoading && !auth.isAnonymous ? 'Profil' : 'Logg inn'}
+            label={!isLoading && !auth?.isAnonymous ? 'Profil' : 'Logg inn'}
             to={URLS.profile}
             value={URLS.profile}
           />

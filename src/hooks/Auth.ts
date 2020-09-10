@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { fbAuth } from '../firebase';
 
 export const useAuth = () => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const [user, setUser] = useState<firebase.User>(fbAuth.currentUser!);
+  const [user, setUser] = useState<firebase.User | null>(fbAuth.currentUser);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {

@@ -96,7 +96,7 @@ function NavBar() {
           <URIbutton data={{ link: URLS.recipes, text: 'Oppskrifter', icon: <RecipesIcon /> }} />
         </div>
 
-        <URIbutton data={{ link: URLS.profile, text: !isLoading && !auth.isAnonymous ? 'Profil' : 'Logg inn', icon: <AccountIcon /> }} />
+        <URIbutton data={{ link: URLS.profile, text: !isLoading && !auth?.isAnonymous ? 'Profil' : 'Logg inn', icon: <AccountIcon /> }} />
       </div>
       <Toolbar className={classes.navContent} disableGutters />
     </>

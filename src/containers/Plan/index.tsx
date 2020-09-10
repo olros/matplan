@@ -1,10 +1,12 @@
-import React from 'react';
-// import { db } from '../../firebase';
+import React, { useEffect, useState } from 'react';
+import { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
+import { IPlan, IDay } from 'types/Firestore';
 
 // Material UI Components
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 // Project components
 import Paper from 'components/layout/Paper';
@@ -20,6 +22,21 @@ const useStyles = makeStyles(() => ({
 const Plan = () => {
   const classes = useStyles();
   const [auth, isLoading] = useAuth();
+  const [days, setDays] = useState<IDay[]>([]);
+
+  useEffect(() => {
+    if (auth && !isLoading) {
+      db.collection('plans')
+        .doc(auth.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data() as IPlan;
+            setDays([...data.days].sort((a, b) => a.day - b.day));
+          }
+        });
+    }
+  }, [auth, isLoading]);
 
   return (
     <Navigation footer isLoading={Boolean(isLoading)}>
@@ -27,7 +44,15 @@ const Plan = () => {
         <Typography variant='h1'>Matplan</Typography>
         <Paper className={classes.paper} outlined>
           <Typography variant='h2'>Her kommer Matplan</Typography>
-          {auth && <Typography variant='h4'></Typography>}
+          {days.map((day) => {
+            // console.log(day);
+            return (
+              <React.Fragment key={day.day}>
+                <Typography variant='h4'>I dag</Typography>
+                <TextField fullWidth value={day.plan} variant='outlined' />
+              </React.Fragment>
+            );
+          })}
         </Paper>
       </Root>
     </Navigation>
