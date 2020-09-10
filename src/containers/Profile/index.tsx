@@ -79,7 +79,7 @@ const Profile = () => {
                   className={classes.field}
                   fullWidth
                   label='Epost'
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   type='email'
                   value={email}
@@ -89,7 +89,7 @@ const Profile = () => {
                   className={classes.field}
                   fullWidth
                   label='Passord'
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   type='password'
                   value={password}

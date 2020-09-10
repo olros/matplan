@@ -47,12 +47,12 @@ export const darkTheme = createMuiTheme({
       color: '#132536',
       textAlign: 'left',
       fontWeight: 700,
-      fontSize: '3rem',
+      fontSize: '3.5rem',
       marginTop: 'auto',
       marginBottom: 'auto',
       whiteSpace: 'normal',
       '@media only screen and (max-width: 600px)': {
-        fontSize: '2rem',
+        fontSize: '3rem',
       },
     },
     h2: {
@@ -64,9 +64,11 @@ export const darkTheme = createMuiTheme({
       marginBottom: 10,
     },
     h3: {
-      color: '#111111',
+      color: '#476282',
       textAlign: 'left',
-      fontSize: '1.1rem',
+      fontSize: '1.2rem',
+      marginTop: 10,
+      marginBottom: 5,
     },
     h4: {
       color: '#476282',
