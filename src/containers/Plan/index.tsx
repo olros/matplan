@@ -56,13 +56,14 @@ const Day = ({ day, updateDay }: { day: IDay; updateDay: (plan: string, day: num
 
 const Plan = () => {
   const classes = useStyles();
-  const [auth, isLoading] = useAuth();
+  const [auth, isAuthLoading] = useAuth();
+  const [isDbLoading, setIsDbLoading] = useState(true);
   const [days, setDays] = useState<IDay[]>([]);
   const [previous, setPrevious] = useState(false);
   const today = dateToNumber(new Date());
 
   useEffect(() => {
-    if (auth && !isLoading) {
+    if (auth && !isAuthLoading) {
       db.collection('plans')
         .doc(auth.uid)
         .get()
@@ -70,19 +71,26 @@ const Plan = () => {
           if (doc.exists) {
             const data = doc.data() as IPlan;
             setDays([...data.days]);
+            setIsDbLoading(false);
+          } else {
+            db.collection('plans').doc(auth.uid).set({
+              uid: auth.uid,
+              public: false,
+              days: [],
+            });
           }
         });
     }
-  }, [auth, isLoading]);
+  }, [auth, isAuthLoading]);
 
   useEffect(() => {
     const unsub = setTimeout(() => {
-      if (auth && !isLoading) {
+      if (auth && !isAuthLoading && !isDbLoading) {
         db.collection('plans').doc(auth.uid).update({ days: days });
       }
     }, 500);
     return () => clearTimeout(unsub);
-  }, [days, auth, isLoading]);
+  }, [days, auth, isAuthLoading, isDbLoading]);
 
   const updateDay = useCallback(
     (plan: string, day: number) => {
@@ -109,7 +117,7 @@ const Plan = () => {
   };
 
   return (
-    <Navigation footer isLoading={Boolean(isLoading)}>
+    <Navigation footer isLoading={Boolean(isAuthLoading) || isDbLoading}>
       <Root>
         <Typography variant='h1'>Matplan</Typography>
         <Paper className={classes.paper} outlined>
@@ -118,7 +126,7 @@ const Plan = () => {
             label='Vis tidligere dager'
           />
           {days
-            .filter((d) => (previous ? d.day <= today : d.day >= today))
+            .filter((d) => (previous ? d.day < today : d.day >= today))
             .sort((a, b) => (previous ? b.day - a.day : a.day - b.day))
             .map((day) => (
               <Day day={day} key={day.day} updateDay={updateDay} />
