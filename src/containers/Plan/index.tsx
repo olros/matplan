@@ -92,7 +92,7 @@ const Plan = () => {
     (plan: string, day: number) => {
       const newDays = [...days];
       const index = days.findIndex((d) => d.day === day);
-      if (index > -1) {
+      if (index > -1 && newDays[index].plan !== plan) {
         newDays[index] = { ...newDays[index], plan: plan };
         setDays(newDays);
       }

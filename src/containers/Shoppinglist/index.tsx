@@ -46,6 +46,7 @@ const Item = ({ item, updateItem, deleteItem, index }: ItemProps) => {
   const classes = useStyles();
   const [what, setWhat] = useState<string>(item?.what || '');
   const [checked, setChecked] = useState<boolean>(item?.checked || false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateItem(what, checked, index), [what, checked, index]);
   useEffect(() => {
     setWhat(item.what);
@@ -102,8 +103,8 @@ const Shoppinglist = () => {
   const updateItem = useCallback(
     (what: string, checked: boolean, index: number) => {
       const newItems = [...items];
-      if (index > -1) {
-        newItems[index] = { ...newItems[index], what: what, checked: checked };
+      if (index > -1 && (newItems[index].what !== what, newItems[index].checked !== checked)) {
+        newItems[index] = { what: what, checked: checked };
         setItems([...newItems]);
       }
     },
