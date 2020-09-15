@@ -55,17 +55,16 @@ There is a file called `matplan.code-workspace` with settings which autoformats 
     {
       "uid": "string",
       "expense_months (collection - docId: YYYYMM)": [
-        {
-          "totalAmount": "number",
-          "totalTimes: "number",
-          "expenses": [
-            {
-              "time": "TIMESTAMP",
-              "amount: "number",
-            }
-          ]
-        }
-      ] 
+        "month": "number (YYYYMM)",
+        "totalAmount": "number",
+        "totalTimes: "number",
+        "expenses": [
+          {
+            "time": "TIMESTAMP",
+            "amount: "number",
+          }
+        ]
+      ]
     }
   ],
   "recipes (collection - docId: random)": [

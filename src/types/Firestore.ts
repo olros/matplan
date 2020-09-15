@@ -12,15 +12,15 @@ export interface IPlan {
 }
 
 export interface IExpense {
-  uid: string;
+  time: firebase.firestore.Timestamp;
+  amount: number;
 }
+
 export interface IExpense_month {
+  month: number;
   totalAmount: number;
   totalTimes: number;
-  expenses: {
-    time: Date;
-    amount: number;
-  }[];
+  expenses: Array<IExpense>;
 }
 
 export interface IRecipes {
