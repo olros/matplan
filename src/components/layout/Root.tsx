@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    '@media only screen and (max-width: 600px)': {
+    ['@media only screen and (max-width: ' + theme.palette.constants.breakWidth + 'px)']: {
       padding: 10,
       paddingTop: 20,
     },

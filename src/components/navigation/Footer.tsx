@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.colors.text.main,
     margin: 'auto',
 
-    '@media only screen and (max-width: 600px)': {
+    ['@media only screen and (max-width: ' + theme.palette.constants.breakWidth + 'px)']: {
       gridTemplateRows: 'auto auto',
       gridTemplateColumns: '1fr',
     },

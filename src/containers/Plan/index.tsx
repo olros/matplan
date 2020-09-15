@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { IPlan, IDay } from 'types/Firestore';
-import { getFormattedDate, numberToDate } from 'utils';
+import { getFormattedDate } from 'utils';
 
 // Material UI Components
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,6 +29,10 @@ const useStyles = makeStyles(() => ({
 
 const dateToNumber = (date: Date): number => {
   return Number(String(date.getFullYear()) + String(date.getMonth() + 1).padStart(2, '0') + String(date.getDate()).padStart(2, '0'));
+};
+
+const numberToDate = (num: number) => {
+  return new Date(Number(String(num).substring(0, 4)), Number(String(num).substring(4, 6)) - 1, Number(String(num).substring(6, 8)));
 };
 
 const Day = ({ day, updateDay }: { day: IDay; updateDay: (plan: string, day: number) => void }) => {

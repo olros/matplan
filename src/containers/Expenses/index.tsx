@@ -6,7 +6,7 @@ import { getFormattedDate, numberToDate } from 'utils';
 import { useForm, Controller } from 'react-hook-form';
 
 // Material UI Components
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -31,7 +31,7 @@ import Paper from 'components/layout/Paper';
 import Root from 'components/layout/Root';
 import Navigation from 'components/navigation/Navigation';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   nested: {
     paddingLeft: 40,
   },
@@ -44,7 +44,7 @@ const useStyles = makeStyles(() => ({
     gridGap: 20,
     gridTemplateAreas: '"overview add"',
     gridTemplateColumns: '2fr 1fr',
-    '@media only screen and (max-width: 600px)': {
+    ['@media only screen and (max-width: ' + theme.palette.constants.breakWidth + 'px)']: {
       gridGap: 10,
       gridTemplateAreas: '"add" "overview"',
       gridTemplateColumns: '1fr',

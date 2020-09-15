@@ -67,5 +67,5 @@ export const getFormattedDate = (dateObj: Date, time = true, day = true, date = 
 };
 
 export const numberToDate = (num: number) => {
-  return new Date(Number(String(num).substring(0, 4)), Number(String(num).substring(4, 6)) - 1, Number(String(num).substring(6, 8)));
+  return new Date(Number(String(num).substring(0, 4)), Number(String(num).substring(4, 6)), Number(String(num).substring(6, 8)));
 };

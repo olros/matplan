@@ -19,7 +19,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme: Theme) => ({
   snackbar: {
-    '@media only screen and (max-width: 600px)': {
+    ['@media only screen and (max-width: ' + theme.palette.constants.breakWidth + 'px)']: {
       bottom: 75,
     },
   },

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexWrap: 'nowrap',
     alignItems: 'center',
     marginRight: 10,
-    '@media only screen and (max-width: 600px)': {
+    ['@media only screen and (max-width: ' + theme.palette.constants.breakWidth + 'px)']: {
       paddingLeft: 15,
     },
   },

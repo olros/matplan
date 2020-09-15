@@ -17,6 +17,7 @@ declare module '@material-ui/core/styles/createPalette' {
     };
     constants: {
       maxWidth: number;
+      breakWidth: number;
     };
   }
 
@@ -36,11 +37,25 @@ declare module '@material-ui/core/styles/createPalette' {
     };
     constants?: {
       maxWidth?: number;
+      breakWidth?: number;
     };
   }
 }
+const constants = {
+  maxWidth: 1000,
+  breakWidth: 750,
+};
 
 export const darkTheme = createMuiTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: constants.breakWidth,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
   typography: {
     fontFamily: '"Krub", "Roboto", "Helvetica", sans-serif',
     h1: {
@@ -51,7 +66,7 @@ export const darkTheme = createMuiTheme({
       marginTop: 'auto',
       marginBottom: 'auto',
       whiteSpace: 'normal',
-      '@media only screen and (max-width: 600px)': {
+      ['@media only screen and (max-width: ' + constants.breakWidth + 'px)']: {
         fontSize: '3rem',
       },
     },
@@ -106,7 +121,7 @@ export const darkTheme = createMuiTheme({
       },
     },
     constants: {
-      maxWidth: 1000,
+      ...constants,
     },
   },
 });

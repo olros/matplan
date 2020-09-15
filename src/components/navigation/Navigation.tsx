@@ -30,13 +30,13 @@ const Navigation = ({ children, isLoading, footer, noTopbar }: Props) => {
   return (
     <>
       {!noTopbar && (
-        <Hidden xsDown>
+        <Hidden smDown>
           <TopBar />
         </Hidden>
       )}
       <main className={classes.main}>{isLoading ? <LinearProgress /> : <div>{children}</div>}</main>
       {footer && !isLoading && <Footer />}
-      <Hidden smUp>
+      <Hidden mdUp>
         <BottomBar />
       </Hidden>
     </>

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 10,
     padding: 20,
     marginBottom: 20,
-    '@media only screen and (max-width: 600px)': {
+    ['@media only screen and (max-width: ' + theme.palette.constants.breakWidth + 'px)']: {
       marginBottom: 10,
     },
   },
