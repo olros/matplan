@@ -13,6 +13,7 @@ import ExpensesIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import RecipesIcon from '@material-ui/icons/FastfoodRounded';
 import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
 import PlanIcon from '@material-ui/icons/ViewDayOutlined';
+import ListIcon from '@material-ui/icons/FormatListBulletedRounded';
 
 const useStyles = makeStyles((theme: Theme) => ({
   navContent: {
@@ -92,6 +93,7 @@ function NavBar() {
       <div className={classes.navWrapper}>
         <div className={classes.grow}>
           <URIbutton data={{ link: URLS.plan, text: 'Plan', icon: <PlanIcon /> }} />
+          <URIbutton data={{ link: URLS.shoplist, text: 'Handleliste', icon: <ListIcon /> }} />
           <URIbutton data={{ link: URLS.expenses, text: 'Utgifter', icon: <ExpensesIcon /> }} />
           <URIbutton data={{ link: URLS.recipes, text: 'Oppskrifter', icon: <RecipesIcon /> }} />
         </div>

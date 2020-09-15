@@ -14,6 +14,7 @@ import PlanIcon from '@material-ui/icons/ViewDayOutlined';
 import ExpensesIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import RecipesIcon from '@material-ui/icons/FastfoodRounded';
 import AccountIcon from '@material-ui/icons/AccountCircleOutlined';
+import ListIcon from '@material-ui/icons/FormatListBulletedRounded';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -58,6 +59,14 @@ const BottomBar = () => {
             label='Plan'
             to={URLS.plan}
             value={URLS.plan}
+          />
+          <BottomNavigationAction
+            classes={{ root: classes.action, selected: classes.selected }}
+            component={Link}
+            icon={<ListIcon />}
+            label='Handleliste'
+            to={URLS.shoplist}
+            value={URLS.shoplist}
           />
           <BottomNavigationAction
             classes={{ root: classes.action, selected: classes.selected }}
