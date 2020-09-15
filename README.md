@@ -51,6 +51,19 @@ There is a file called `matplan.code-workspace` with settings which autoformats 
       ]
     }
   ],
+  "shoppinglists (collection - docId: uid)": [
+    {
+      "uid": "string",
+      "public": "boolean",
+      "slug": "string",
+      "items": [
+        {
+          "what": "string",
+          "checked": "boolean"
+        }
+      ]
+    }
+  ],
   "expenses (collection - docId: uid)": [
     {
       "uid": "string",
@@ -61,7 +74,7 @@ There is a file called `matplan.code-workspace` with settings which autoformats 
         "expenses": [
           {
             "time": "TIMESTAMP",
-            "amount: "number",
+            "amount: "number"
           }
         ]
       ]
@@ -76,7 +89,7 @@ There is a file called `matplan.code-workspace` with settings which autoformats 
       "ingredients": [
         {
           "name": "string",
-          "amount": "number",
+          "amount": "number"
         }
       ],
       "steps": [

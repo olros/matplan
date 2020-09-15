@@ -65,8 +65,8 @@ const BottomBar = () => {
             component={Link}
             icon={<ListIcon />}
             label='Handleliste'
-            to={URLS.shoplist}
-            value={URLS.shoplist}
+            to={URLS.shoppinglist}
+            value={URLS.shoppinglist}
           />
           <BottomNavigationAction
             classes={{ root: classes.action, selected: classes.selected }}

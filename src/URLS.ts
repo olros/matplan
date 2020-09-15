@@ -2,6 +2,6 @@ export default {
   plan: '/',
   recipes: '/oppskrifter/',
   profile: '/profil/',
-  shoplist: '/handleliste/',
+  shoppinglist: '/handleliste/',
   expenses: '/utgifter/',
 };

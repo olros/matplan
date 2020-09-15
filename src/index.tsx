@@ -15,7 +15,7 @@ import Expenses from 'containers/Expenses';
 import Plan from 'containers/Plan';
 import Profile from 'containers/Profile';
 import Recipes from 'containers/Recipes';
-import Shoplist from 'containers/Shoplist';
+import Shoppinglist from 'containers/Shoppinglist';
 
 const Application = () => {
   // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -49,7 +49,7 @@ const Application = () => {
             <Route element={<Plan />} path={URLS.plan} />
             <Route element={<Profile />} path={URLS.profile} />
             <Route element={<Recipes />} path={URLS.recipes} />
-            <Route element={<Shoplist />} path={URLS.shoplist} />
+            <Route element={<Shoppinglist />} path={URLS.shoppinglist} />
           </Routes>
         </BrowserRouter>
       </SnackbarProvider>

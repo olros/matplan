@@ -93,7 +93,7 @@ function NavBar() {
       <div className={classes.navWrapper}>
         <div className={classes.grow}>
           <URIbutton data={{ link: URLS.plan, text: 'Plan', icon: <PlanIcon /> }} />
-          <URIbutton data={{ link: URLS.shoplist, text: 'Handleliste', icon: <ListIcon /> }} />
+          <URIbutton data={{ link: URLS.shoppinglist, text: 'Handleliste', icon: <ListIcon /> }} />
           <URIbutton data={{ link: URLS.expenses, text: 'Utgifter', icon: <ExpensesIcon /> }} />
           <URIbutton data={{ link: URLS.recipes, text: 'Oppskrifter', icon: <RecipesIcon /> }} />
         </div>

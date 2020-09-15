@@ -11,6 +11,18 @@ export interface IPlan {
   days: Array<IDay>;
 }
 
+export interface IShoppinglistItem {
+  what: string;
+  checked: boolean;
+}
+
+export interface IShoppinglist {
+  uid: string;
+  public: boolean;
+  slug?: string;
+  items: Array<IShoppinglistItem>;
+}
+
 export interface IExpense {
   time: firebase.firestore.Timestamp;
   amount: number;
