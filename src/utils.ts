@@ -24,29 +24,29 @@ export const getDayString = (day: number) => {
 export const getMonthString = (month: number) => {
   switch (month) {
     case 0:
-      return 'jan';
+      return 'Januar';
     case 1:
-      return 'feb';
+      return 'Februar';
     case 2:
-      return 'mars';
+      return 'Mars';
     case 3:
-      return 'april';
+      return 'April';
     case 4:
-      return 'mai';
+      return 'Mai';
     case 5:
-      return 'juni';
+      return 'Juni';
     case 6:
-      return 'juli';
+      return 'Juli';
     case 7:
-      return 'aug';
+      return 'August';
     case 8:
-      return 'sep';
+      return 'September';
     case 9:
-      return 'okt';
+      return 'Oktober';
     case 10:
-      return 'nov';
+      return 'November';
     case 11:
-      return 'des';
+      return 'Desember';
     default:
       return month;
   }
@@ -56,13 +56,16 @@ export const getMonthString = (month: number) => {
 const addLeadingZero = (i: number) => (i < 10 ? '0' + i : i);
 
 // Transform date to formatted string
-export const getFormattedDate = (date: Date, time = true) => {
+export const getFormattedDate = (dateObj: Date, time = true, day = true, date = true, month = true, year = true) => {
   return (
-    getDayString(date.getDay()) +
-    ' ' +
-    date.getDate() +
-    ' ' +
-    getMonthString(date.getMonth()) +
-    (time ? ' - ' + addLeadingZero(date.getHours()) + ':' + addLeadingZero(date.getMinutes()) : '')
+    (day ? getDayString(dateObj.getDay()) : '') +
+    (date ? ' ' + dateObj.getDate() : '') +
+    (month ? ' ' + getMonthString(dateObj.getMonth()) : '') +
+    (year ? ' ' + dateObj.getFullYear() : '') +
+    (time ? ' - ' + addLeadingZero(dateObj.getHours()) + ':' + addLeadingZero(dateObj.getMinutes()) : '')
   );
+};
+
+export const numberToDate = (num: number) => {
+  return new Date(Number(String(num).substring(0, 4)), Number(String(num).substring(4, 6)) - 1, Number(String(num).substring(6, 8)));
 };

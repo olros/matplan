@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import firebase, { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { IExpense, IExpense_month } from 'types/Firestore';
-import { getFormattedDate } from 'utils';
+import { getFormattedDate, numberToDate } from 'utils';
 import { useForm, Controller } from 'react-hook-form';
-  
+
 // Material UI Components
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -197,7 +197,10 @@ const Expenses = () => {
                         <ListItemIcon>
                           <MonthIcon color='primary' />
                         </ListItemIcon>
-                        <ListItemText primary={month.month} secondary={'Utgifter: ' + month.totalAmount + ' kr'} />
+                        <ListItemText
+                          primary={getFormattedDate(numberToDate(month.month), false, false, false)}
+                          secondary={'Utgifter: ' + month.totalAmount + ' kr'}
+                        />
                         {openMonth === month.month ? <ExpandLess /> : <ExpandMore />}
                       </ListItem>
                       <Collapse in={openMonth === month.month} timeout='auto' unmountOnExit>

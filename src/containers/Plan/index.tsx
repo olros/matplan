@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { IPlan, IDay } from 'types/Firestore';
-import { getFormattedDate } from 'utils';
+import { getFormattedDate, numberToDate } from 'utils';
 
 // Material UI Components
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,10 +31,6 @@ const dateToNumber = (date: Date): number => {
   return Number(String(date.getFullYear()) + String(date.getMonth() + 1).padStart(2, '0') + String(date.getDate()).padStart(2, '0'));
 };
 
-const numberToDate = (num: number) => {
-  return new Date(Number(String(num).substring(0, 4)), Number(String(num).substring(4, 6)) - 1, Number(String(num).substring(6, 8)));
-};
-
 const Day = ({ day, updateDay }: { day: IDay; updateDay: (plan: string, day: number) => void }) => {
   const [plan, setPlan] = useState<string>(day?.plan || '');
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,11 +38,11 @@ const Day = ({ day, updateDay }: { day: IDay; updateDay: (plan: string, day: num
 
   return (
     <React.Fragment>
-      <Typography variant='h3'>{getFormattedDate(numberToDate(day.day), false)}</Typography>
+      <Typography variant='h3'>{getFormattedDate(numberToDate(day.day), false, true, true, true, false)}</Typography>
       <TextField
         fullWidth
         onChange={(e) => setPlan(e.target.value)}
-        placeholder={getFormattedDate(numberToDate(day.day), false)}
+        placeholder={getFormattedDate(numberToDate(day.day), false, true, true, true, false)}
         value={plan}
         variant='outlined'
       />
