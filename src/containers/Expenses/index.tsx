@@ -73,7 +73,8 @@ const Expenses = () => {
 
   useEffect(() => {
     if (auth && !isAuthLoading) {
-      db.collection('expenses')
+      const unsub = db
+        .collection('expenses')
         .doc(auth.uid)
         .collection('expense_months')
         .onSnapshot((docs) => {
@@ -84,6 +85,7 @@ const Expenses = () => {
           setMonths(newMonths);
           setIsDbLoading(false);
         });
+      return () => unsub();
     }
   }, [auth, isAuthLoading]);
 
@@ -214,7 +216,9 @@ const Expenses = () => {
                                   <ListItemIcon>
                                     <MoneyIcon color='secondary' />
                                   </ListItemIcon>
-                                  <ListItemText primary={expense.amount + ' kr - ' + getFormattedDate(expense.time.toDate(), false)} />
+                                  <ListItemText
+                                    primary={expense.amount + ' kr - ' + getFormattedDate(expense.time.toDate(), false, false, true, true, false)}
+                                  />
                                   <ListItemSecondaryAction>
                                     <IconButton aria-label='delete' edge='end' onClick={() => deleteExpense(month.month, expense)}>
                                       <DeleteIcon color='secondary' />

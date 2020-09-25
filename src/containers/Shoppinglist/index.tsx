@@ -79,7 +79,6 @@ const Shoppinglist = () => {
           if (doc.exists) {
             const data = doc.data() as IShoppinglist;
             setItems([...data.items]);
-            setIsDbLoading(false);
           } else {
             db.collection('shoppinglists').doc(auth.uid).set({
               uid: auth.uid,
@@ -87,6 +86,7 @@ const Shoppinglist = () => {
               items: [],
             });
           }
+          setIsDbLoading(false);
         });
     }
   }, [auth, isAuthLoading]);
@@ -103,7 +103,7 @@ const Shoppinglist = () => {
   const updateItem = useCallback(
     (what: string, checked: boolean, index: number) => {
       const newItems = [...items];
-      if (index > -1 && (newItems[index].what !== what, newItems[index].checked !== checked)) {
+      if (index > -1 && (newItems[index].what !== what || newItems[index].checked !== checked)) {
         newItems[index] = { what: what, checked: checked };
         setItems([...newItems]);
       }

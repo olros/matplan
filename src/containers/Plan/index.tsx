@@ -71,7 +71,6 @@ const Plan = () => {
           if (doc.exists) {
             const data = doc.data() as IPlan;
             setDays([...data.days]);
-            setIsDbLoading(false);
           } else {
             db.collection('plans').doc(auth.uid).set({
               uid: auth.uid,
@@ -79,6 +78,7 @@ const Plan = () => {
               days: [],
             });
           }
+          setIsDbLoading(false);
         });
     }
   }, [auth, isAuthLoading]);
@@ -109,7 +109,10 @@ const Plan = () => {
       const lastDay = days.sort((a, b) => (previous ? b.day - a.day : a.day - b.day))[days.length - 1];
       const nextDate = numberToDate(lastDay.day);
       nextDate.setDate(nextDate.getDate() + 1);
-      const nextDay = dateToNumber(nextDate);
+      let nextDay = dateToNumber(nextDate);
+      if (nextDate < new Date()) {
+        nextDay = dateToNumber(new Date());
+      }
       setDays([...days, { day: nextDay, plan: '' }]);
     } else {
       setDays([{ day: dateToNumber(new Date()), plan: '' }]);
