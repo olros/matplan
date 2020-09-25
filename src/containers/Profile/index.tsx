@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import firebase, { fbAuth } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { useSnackbar } from 'context/SnackbarContext';
+import { useTheme } from 'context/ThemeContext';
+import { setCookie, getCookie } from '../../cookie';
+import { THEME } from 'types/Enums';
 
 // Material UI Components
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 // Project components
 import Paper from 'components/layout/Paper';
@@ -27,9 +35,17 @@ const Profile = () => {
   const classes = useStyles();
   const { showSnackbar } = useSnackbar();
   const [auth, isLoading] = useAuth();
+  const theme = useTheme();
   const [isLogIn, setIsLogIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  let cookieValue = getCookie(THEME.KEY);
+  if (cookieValue === undefined) {
+    cookieValue = THEME.AUTOMATIC;
+    setCookie(THEME.KEY, cookieValue);
+  }
+  const [themeName, setThemeName] = useState(cookieValue);
+
   const signUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (auth) {
@@ -60,6 +76,11 @@ const Profile = () => {
 
   const signOut = () => {
     fbAuth.signOut();
+  };
+
+  const changeTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setThemeName(e.target.value);
+    theme.set(e.target.value);
   };
 
   return (
@@ -105,6 +126,14 @@ const Profile = () => {
             ) : (
               <>
                 <Typography variant='h2'>Du er logget inn med: {auth.email}</Typography>
+                <FormControl component='fieldset'>
+                  <FormLabel component='legend'>Tema</FormLabel>
+                  <RadioGroup aria-label='gender' name='gender1' onChange={changeTheme} value={themeName}>
+                    <FormControlLabel control={<Radio />} label='Lyst' value={THEME.LIGHT} />
+                    <FormControlLabel control={<Radio />} label='Automatisk' value={THEME.AUTOMATIC} />
+                    <FormControlLabel control={<Radio />} label='Mørkt' value={THEME.DARK} />
+                  </RadioGroup>
+                </FormControl>
                 <Button className={classes.field} color='primary' fullWidth onClick={signOut} variant='outlined'>
                   Logg ut
                 </Button>

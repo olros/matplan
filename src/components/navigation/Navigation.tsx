@@ -1,7 +1,7 @@
 import React, { useEffect, ReactNode } from 'react';
 
 // Material UI Components
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Hidden from '@material-ui/core/Hidden';
 
@@ -10,7 +10,10 @@ import Footer from './Footer';
 import TopBar from './TopBar';
 import BottomBar from './BottomBar';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    background: theme.palette.colors.background.primary,
+  },
   main: {
     minHeight: '101vh',
   },
@@ -28,7 +31,7 @@ const Navigation = ({ children, isLoading, footer, noTopbar }: Props) => {
   useEffect(() => window.scrollTo(0, 0), []);
 
   return (
-    <>
+    <div className={classes.root}>
       {!noTopbar && (
         <Hidden smDown>
           <TopBar />
@@ -39,7 +42,7 @@ const Navigation = ({ children, isLoading, footer, noTopbar }: Props) => {
       <Hidden mdUp>
         <BottomBar />
       </Hidden>
-    </>
+    </div>
   );
 };
 
