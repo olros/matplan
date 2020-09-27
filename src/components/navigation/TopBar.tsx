@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import URLS from 'URLS';

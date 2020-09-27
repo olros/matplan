@@ -1,4 +1,4 @@
-// import React, { lazy, Suspense, unstable_useTransition as useTransition } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { lazy, Suspense } from 'react';
 import { unstable_createRoot as createRoot } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

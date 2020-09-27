@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState, useEffect, useContext, createContext, ReactNode } from 'react';
 import { THEME } from 'types/Enums';
 import { getCookie, setCookie } from '../cookie';
