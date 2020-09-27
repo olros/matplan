@@ -37,8 +37,4 @@ const Application = () => {
   );
 };
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <Application />
-  </React.StrictMode>,
-);
+createRoot(document.getElementById('root') as HTMLElement).render(<Application />);
