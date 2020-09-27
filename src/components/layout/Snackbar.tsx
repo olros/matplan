@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexWrap: 'wrap',
     flexGrow: 1,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: theme.palette.colors.background.secondary,
     '@media only screen and (min-width: 600px)': {
       flexGrow: 'initial',
       minWidth: 344,

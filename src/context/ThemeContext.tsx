@@ -7,7 +7,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 interface ContextProps {
   get: Theme;
-  getEnum: THEME;
+  getEnum: () => THEME;
   set: (n: string) => void;
 }
 
@@ -34,7 +34,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateTheme(getCookie(THEME.KEY)), [prefersDarkMode]);
 
-  const themeStore = { get: getTheme(useLightTheme), getEnum: getEnum(), set: updateTheme };
+  const themeStore = { get: getTheme(useLightTheme), getEnum: getEnum, set: updateTheme };
 
   return (
     <ThemeContext.Provider value={themeStore}>

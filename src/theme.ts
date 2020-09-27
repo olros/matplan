@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 declare module '@material-ui/core/styles/createPalette' {
+  // eslint-disable-next-line
   interface Palette {
     colors: {
       background: {
@@ -20,6 +21,7 @@ declare module '@material-ui/core/styles/createPalette' {
     };
   }
 
+  // eslint-disable-next-line
   interface PaletteOptions {
     colors?: {
       background: {

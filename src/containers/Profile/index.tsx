@@ -3,7 +3,6 @@ import firebase, { fbAuth } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { useSnackbar } from 'context/SnackbarContext';
 import { useTheme } from 'context/ThemeContext';
-import { setCookie, getCookie } from '../../cookie';
 import { THEME } from 'types/Enums';
 
 // Material UI Components
@@ -39,12 +38,7 @@ const Profile = () => {
   const [isLogIn, setIsLogIn] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  let cookieValue = getCookie(THEME.KEY);
-  if (cookieValue === undefined) {
-    cookieValue = THEME.AUTOMATIC;
-    setCookie(THEME.KEY, cookieValue);
-  }
-  const [themeName, setThemeName] = useState(cookieValue);
+  const [themeName, setThemeName] = useState<string>(theme.getEnum());
 
   const signUp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

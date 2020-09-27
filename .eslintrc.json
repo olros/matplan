@@ -76,6 +76,8 @@
     "no-whitespace-before-property": "error",
     "quote-props": "off",
     "react/jsx-sort-props": ["error"],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "react/no-unescaped-entities": "off",
     "react-hooks/rules-of-hooks": "error",
     "require-jsdoc": "off",
