@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useEffect, ReactNode } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 // Material UI Components
@@ -31,7 +31,9 @@ const Navigation = () => {
         <TopBar />
       </Hidden>
       <main className={classes.main}>
-        <Outlet />
+        <Suspense fallback='Laster'>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
       <Hidden mdUp>
