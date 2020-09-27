@@ -20,25 +20,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
   isLoading?: boolean;
   footer?: boolean;
   noTopbar?: boolean;
 }
 
-const Navigation = ({ children, isLoading, footer, noTopbar }: Props) => {
+const Navigation = ({ children, isLoading }: Props) => {
   const classes = useStyles();
   useEffect(() => window.scrollTo(0, 0), []);
 
   return (
     <div className={classes.root}>
-      {!noTopbar && (
-        <Hidden smDown>
-          <TopBar />
-        </Hidden>
-      )}
+      <Hidden smDown>
+        <TopBar />
+      </Hidden>
       <main className={classes.main}>{isLoading ? <LinearProgress /> : <div>{children}</div>}</main>
-      {footer && !isLoading && <Footer />}
+      <Footer />
       <Hidden mdUp>
         <BottomBar />
       </Hidden>

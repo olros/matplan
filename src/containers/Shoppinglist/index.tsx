@@ -17,7 +17,6 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlineRounded';
 // Project components
 import Paper from 'components/layout/Paper';
 import Root from 'components/layout/Root';
-import Navigation from 'components/navigation/Navigation';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -124,19 +123,17 @@ const Shoppinglist = () => {
   };
 
   return (
-    <Navigation footer isLoading={Boolean(isAuthLoading) || isDbLoading}>
-      <Root>
-        <Typography variant='h1'>Handleliste</Typography>
-        <Paper className={classes.paper} outlined>
-          {items.map((item, index) => (
-            <Item deleteItem={deleteItem} index={index} item={item} key={index} updateItem={updateItem} />
-          ))}
-          <Button className={classes.button} color='primary' fullWidth onClick={addItem} variant='contained'>
-            Legg til
-          </Button>
-        </Paper>
-      </Root>
-    </Navigation>
+    <Root>
+      <Typography variant='h1'>Handleliste</Typography>
+      <Paper className={classes.paper} outlined>
+        {items.map((item, index) => (
+          <Item deleteItem={deleteItem} index={index} item={item} key={index} updateItem={updateItem} />
+        ))}
+        <Button className={classes.button} color='primary' fullWidth onClick={addItem} variant='contained'>
+          Legg til
+        </Button>
+      </Paper>
+    </Root>
   );
 };
 

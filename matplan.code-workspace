@@ -8,7 +8,7 @@
     "editor.formatOnSave": false,
     "[javascript]": { "editor.formatOnSave": false },
     "[javascriptreact]": { "editor.formatOnSave": false },
-    "eslint.validate": [ "html", "javascript", "javascriptreact", "typescript" ],
+    "eslint.validate": [ "html", "javascript", "javascriptreact", "typescript", "typescriptreact" ],
     "prettier.disableLanguages": [ "javascript", "javascriptreact" ],
     "editor.codeActionsOnSave": { "source.fixAll.eslint": true }
   }

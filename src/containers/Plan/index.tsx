@@ -15,7 +15,6 @@ import Switch from '@material-ui/core/Switch';
 // Project components
 import Paper from 'components/layout/Paper';
 import Root from 'components/layout/Root';
-import Navigation from 'components/navigation/Navigation';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -120,28 +119,23 @@ const Plan = () => {
   };
 
   return (
-    <Navigation footer isLoading={Boolean(isAuthLoading) || isDbLoading}>
-      <Root>
-        <Typography variant='h1'>Matplan</Typography>
-        <Paper className={classes.paper} outlined>
-          <FormControlLabel
-            control={<Switch checked={previous} name='checkedA' onChange={(e) => setPrevious(e.target.checked)} />}
-            label='Vis tidligere dager'
-          />
-          {days
-            .filter((d) => (previous ? d.day < today : d.day >= today))
-            .sort((a, b) => (previous ? b.day - a.day : a.day - b.day))
-            .map((day) => (
-              <Day day={day} key={day.day} updateDay={updateDay} />
-            ))}
-          {!previous && (
-            <Button className={classes.button} color='primary' fullWidth onClick={addDay} variant='contained'>
-              Legg til dag
-            </Button>
-          )}
-        </Paper>
-      </Root>
-    </Navigation>
+    <Root>
+      <Typography variant='h1'>Matplan</Typography>
+      <Paper className={classes.paper} outlined>
+        <FormControlLabel control={<Switch checked={previous} name='checkedA' onChange={(e) => setPrevious(e.target.checked)} />} label='Vis tidligere dager' />
+        {days
+          .filter((d) => (previous ? d.day < today : d.day >= today))
+          .sort((a, b) => (previous ? b.day - a.day : a.day - b.day))
+          .map((day) => (
+            <Day day={day} key={day.day} updateDay={updateDay} />
+          ))}
+        {!previous && (
+          <Button className={classes.button} color='primary' fullWidth onClick={addDay} variant='contained'>
+            Legg til dag
+          </Button>
+        )}
+      </Paper>
+    </Root>
   );
 };
 

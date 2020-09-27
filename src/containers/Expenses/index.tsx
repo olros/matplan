@@ -29,7 +29,6 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlineRounded';
 // Project components
 import Paper from 'components/layout/Paper';
 import Root from 'components/layout/Root';
-import Navigation from 'components/navigation/Navigation';
 
 const useStyles = makeStyles((theme: Theme) => ({
   nested: {
@@ -67,7 +66,6 @@ const Expenses = () => {
   const classes = useStyles();
   const [auth, isAuthLoading] = useAuth();
   const { handleSubmit, errors, control, setError, reset } = useForm<FormAddExpenses>();
-  const [isDbLoading, setIsDbLoading] = useState(true);
   const [months, setMonths] = useState<IExpense_month[]>([]);
   const [openMonth, setOpenMonth] = useState<number | null>(null);
 
@@ -83,7 +81,6 @@ const Expenses = () => {
             newMonths.push(doc.data() as IExpense_month);
           });
           setMonths(newMonths);
-          setIsDbLoading(false);
         });
       return () => unsub();
     }
@@ -139,105 +136,101 @@ const Expenses = () => {
   };
 
   return (
-    <Navigation footer isLoading={Boolean(isAuthLoading || isDbLoading)}>
-      <Root>
-        <Typography variant='h1'>Utgifter</Typography>
-        <div className={classes.content}>
-          <div className={classes.add}>
-            <Paper outlined>
-              <form onSubmit={handleSubmit(addExpense)}>
-                <Typography variant='h2'>Legg til utgift</Typography>
-                <Controller
-                  as={TextField}
-                  className={classes.field}
-                  control={control}
-                  defaultValue='0'
-                  error={Boolean(errors.amount)}
-                  fullWidth
-                  helperText={errors.amount?.message}
-                  label='Sum'
-                  name='amount'
-                  required
-                  rules={{ required: 'Feltet er påkrevd' }}
-                  type='number'
-                  variant='outlined'
-                />
-                <Controller
-                  as={TextField}
-                  className={classes.field}
-                  control={control}
-                  defaultValue={getFormattedDateValue(new Date())}
-                  error={Boolean(errors.time)}
-                  fullWidth
-                  helperText={errors.time?.message}
-                  label='Når'
-                  name='time'
-                  required
-                  rules={{ required: 'Feltet er påkrevd' }}
-                  type='date'
-                  variant='outlined'
-                />
-                <Button color='primary' fullWidth type='submit' variant='contained'>
-                  Legg til
-                </Button>
-              </form>
-            </Paper>
-          </div>
-          <div className={classes.overview}>
-            <Paper outlined>
-              <Typography variant='h2'>Oversikt</Typography>
-              <List>
-                {months
-                  .sort((a, b) => b.month - a.month)
-                  .map((month, index) => (
-                    <React.Fragment key={month.month}>
-                      <ListItem
-                        button
-                        onClick={() => {
-                          setOpenMonth(openMonth === month.month ? null : month.month);
-                        }}>
-                        <ListItemIcon>
-                          <MonthIcon color='primary' />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={getFormattedDate(numberToDate(month.month), false, false, false)}
-                          secondary={'Utgifter: ' + month.totalAmount + ' kr'}
-                        />
-                        {openMonth === month.month ? <ExpandLess /> : <ExpandMore />}
-                      </ListItem>
-                      <Collapse in={openMonth === month.month} timeout='auto' unmountOnExit>
-                        <List component='div' disablePadding>
-                          {month.expenses
-                            .sort((a, b) => b.time.toMillis() - a.time.toMillis())
-                            .map((expense, index) => (
-                              <React.Fragment key={index}>
-                                <Divider component='li' variant='inset' />
-                                <ListItem className={classes.nested} key={index}>
-                                  <ListItemIcon>
-                                    <MoneyIcon color='secondary' />
-                                  </ListItemIcon>
-                                  <ListItemText
-                                    primary={expense.amount + ' kr - ' + getFormattedDate(expense.time.toDate(), false, false, true, true, false)}
-                                  />
-                                  <ListItemSecondaryAction>
-                                    <IconButton aria-label='delete' edge='end' onClick={() => deleteExpense(month.month, expense)}>
-                                      <DeleteIcon color='secondary' />
-                                    </IconButton>
-                                  </ListItemSecondaryAction>
-                                </ListItem>
-                              </React.Fragment>
-                            ))}
-                        </List>
-                      </Collapse>
-                      {index !== months.length - 1 && <Divider component='li' variant='inset' />}
-                    </React.Fragment>
-                  ))}
-              </List>
-            </Paper>
-          </div>
+    <Root>
+      <Typography variant='h1'>Utgifter</Typography>
+      <div className={classes.content}>
+        <div className={classes.add}>
+          <Paper outlined>
+            <form onSubmit={handleSubmit(addExpense)}>
+              <Typography variant='h2'>Legg til utgift</Typography>
+              <Controller
+                as={TextField}
+                className={classes.field}
+                control={control}
+                defaultValue='0'
+                error={Boolean(errors.amount)}
+                fullWidth
+                helperText={errors.amount?.message}
+                label='Sum'
+                name='amount'
+                required
+                rules={{ required: 'Feltet er påkrevd' }}
+                type='number'
+                variant='outlined'
+              />
+              <Controller
+                as={TextField}
+                className={classes.field}
+                control={control}
+                defaultValue={getFormattedDateValue(new Date())}
+                error={Boolean(errors.time)}
+                fullWidth
+                helperText={errors.time?.message}
+                label='Når'
+                name='time'
+                required
+                rules={{ required: 'Feltet er påkrevd' }}
+                type='date'
+                variant='outlined'
+              />
+              <Button color='primary' fullWidth type='submit' variant='contained'>
+                Legg til
+              </Button>
+            </form>
+          </Paper>
         </div>
-      </Root>
-    </Navigation>
+        <div className={classes.overview}>
+          <Paper outlined>
+            <Typography variant='h2'>Oversikt</Typography>
+            <List>
+              {months
+                .sort((a, b) => b.month - a.month)
+                .map((month, index) => (
+                  <React.Fragment key={month.month}>
+                    <ListItem
+                      button
+                      onClick={() => {
+                        setOpenMonth(openMonth === month.month ? null : month.month);
+                      }}>
+                      <ListItemIcon>
+                        <MonthIcon color='primary' />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={getFormattedDate(numberToDate(month.month), false, false, false)}
+                        secondary={'Utgifter: ' + month.totalAmount + ' kr'}
+                      />
+                      {openMonth === month.month ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={openMonth === month.month} timeout='auto' unmountOnExit>
+                      <List component='div' disablePadding>
+                        {month.expenses
+                          .sort((a, b) => b.time.toMillis() - a.time.toMillis())
+                          .map((expense, index) => (
+                            <React.Fragment key={index}>
+                              <Divider component='li' variant='inset' />
+                              <ListItem className={classes.nested} key={index}>
+                                <ListItemIcon>
+                                  <MoneyIcon color='secondary' />
+                                </ListItemIcon>
+                                <ListItemText primary={expense.amount + ' kr - ' + getFormattedDate(expense.time.toDate(), false, false, true, true, false)} />
+                                <ListItemSecondaryAction>
+                                  <IconButton aria-label='delete' edge='end' onClick={() => deleteExpense(month.month, expense)}>
+                                    <DeleteIcon color='secondary' />
+                                  </IconButton>
+                                </ListItemSecondaryAction>
+                              </ListItem>
+                            </React.Fragment>
+                          ))}
+                      </List>
+                    </Collapse>
+                    {index !== months.length - 1 && <Divider component='li' variant='inset' />}
+                  </React.Fragment>
+                ))}
+            </List>
+          </Paper>
+        </div>
+      </div>
+    </Root>
   );
 };
 

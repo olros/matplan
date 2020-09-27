@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import URLS from 'URLS';
 import { useAuth } from 'hooks/Auth';
 
@@ -70,15 +70,16 @@ interface URIButtonProps {
 
 const URIbutton = ({ data }: URIButtonProps) => {
   const classes = useStyles();
+  const location = useLocation();
   return (
     <Button
       className={classes.button}
-      color={window.location.pathname === data.link ? 'primary' : 'secondary'}
+      color={location.pathname === data.link ? 'primary' : 'secondary'}
       component={Link}
-      onClick={() => (data.link === window.location.pathname ? window.location.reload() : {})}
+      onClick={() => (data.link === location.pathname ? window.location.reload() : {})}
       startIcon={data.icon}
       to={data.link}
-      variant={window.location.pathname === data.link ? 'contained' : 'outlined'}>
+      variant={location.pathname === data.link ? 'contained' : 'outlined'}>
       {data.text}
     </Button>
   );

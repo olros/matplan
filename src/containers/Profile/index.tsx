@@ -19,7 +19,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 // Project components
 import Paper from 'components/layout/Paper';
 import Root from 'components/layout/Root';
-import Navigation from 'components/navigation/Navigation';
 
 const useStyles = makeStyles(() => ({
   paper: {
@@ -33,7 +32,7 @@ const useStyles = makeStyles(() => ({
 const Profile = () => {
   const classes = useStyles();
   const { showSnackbar } = useSnackbar();
-  const [auth, isLoading] = useAuth();
+  const [auth] = useAuth();
   const theme = useTheme();
   const [isLogIn, setIsLogIn] = useState(true);
   const [email, setEmail] = useState('');
@@ -78,7 +77,7 @@ const Profile = () => {
   };
 
   return (
-    <Navigation footer isLoading={Boolean(isLoading)}>
+    <>
       {auth && (
         <Root>
           <Typography variant='h1'>Profil</Typography>
@@ -123,9 +122,9 @@ const Profile = () => {
                 <FormControl component='fieldset'>
                   <FormLabel component='legend'>Tema</FormLabel>
                   <RadioGroup aria-label='gender' name='gender1' onChange={changeTheme} value={themeName}>
-                    <FormControlLabel control={<Radio />} label='Lyst' value={THEME.LIGHT} />
-                    <FormControlLabel control={<Radio />} label='Automatisk' value={THEME.AUTOMATIC} />
-                    <FormControlLabel control={<Radio />} label='Mørkt' value={THEME.DARK} />
+                    <FormControlLabel control={<Radio color='primary' />} label='Lyst' value={THEME.LIGHT} />
+                    <FormControlLabel control={<Radio color='primary' />} label='Automatisk' value={THEME.AUTOMATIC} />
+                    <FormControlLabel control={<Radio color='primary' />} label='Mørkt' value={THEME.DARK} />
                   </RadioGroup>
                 </FormControl>
                 <Button className={classes.field} color='primary' fullWidth onClick={signOut} variant='outlined'>
@@ -136,7 +135,7 @@ const Profile = () => {
           </Paper>
         </Root>
       )}
-    </Navigation>
+    </>
   );
 };
 
