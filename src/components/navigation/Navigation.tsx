@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useEffect, ReactNode } from 'react';
+import { Outlet } from 'react-router-dom';
 
 // Material UI Components
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -20,14 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {
-  children?: ReactNode;
-  isLoading?: boolean;
-  footer?: boolean;
-  noTopbar?: boolean;
-}
-
-const Navigation = ({ children, isLoading }: Props) => {
+const Navigation = () => {
   const classes = useStyles();
   useEffect(() => window.scrollTo(0, 0), []);
 
@@ -36,7 +30,9 @@ const Navigation = ({ children, isLoading }: Props) => {
       <Hidden smDown>
         <TopBar />
       </Hidden>
-      <main className={classes.main}>{isLoading ? <LinearProgress /> : <div>{children}</div>}</main>
+      <main className={classes.main}>
+        <Outlet />
+      </main>
       <Footer />
       <Hidden mdUp>
         <BottomBar />

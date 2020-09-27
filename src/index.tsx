@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { lazy, Suspense } from 'react';
+import React, { lazy } from 'react';
 import { unstable_createRoot as createRoot } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import URLS from 'URLS';
@@ -22,17 +22,15 @@ const Application = () => {
     <ThemeProvider>
       <SnackbarProvider>
         <BrowserRouter>
-          <Navigation>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                <Route element={<Expenses />} path={URLS.expenses} />
-                <Route element={<Plan />} path={URLS.plan} />
-                <Route element={<Profile />} path={URLS.profile} />
-                <Route element={<Recipes />} path={URLS.recipes} />
-                <Route element={<Shoppinglist />} path={URLS.shoppinglist} />
-              </Routes>
-            </Suspense>
-          </Navigation>
+          <Routes>
+            <Route element={<Navigation />} path={'*'}>
+              <Route element={<Expenses />} path={URLS.expenses} />
+              <Route element={<Plan />} path={URLS.plan} />
+              <Route element={<Profile />} path={URLS.profile} />
+              <Route element={<Recipes />} path={URLS.recipes} />
+              <Route element={<Shoppinglist />} path={URLS.shoppinglist} />
+            </Route>
+          </Routes>
         </BrowserRouter>
       </SnackbarProvider>
     </ThemeProvider>
