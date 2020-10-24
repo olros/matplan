@@ -9,7 +9,6 @@ This website uses the following technologies
 * Material-UI (CSS-framework)
 * Firebase Firestore
 * Firebase Auth
-* i18next
 
 ### Getting started
 
