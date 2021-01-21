@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useState } from 'react';
+import { useState } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexWrap: 'wrap',
     flexGrow: 1,
-    backgroundColor: theme.palette.colors.background.secondary,
+    backgroundColor: theme.palette.background.paper,
     '@media only screen and (min-width: 600px)': {
       flexGrow: 'initial',
       minWidth: 344,

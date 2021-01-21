@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import URLS from 'URLS';
 import { useAuth } from 'hooks/Auth';
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   menuButton: {
-    color: theme.palette.colors.text.main,
+    color: theme.palette.text.primary,
   },
   grow: {
     flexGrow: 1,

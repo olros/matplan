@@ -57,6 +57,9 @@ export const getTheme = (light: boolean) =>
         xl: 1920,
       },
     },
+    shape: {
+      borderRadius: 16,
+    },
     typography: {
       fontFamily: '"Krub", "Roboto", "Helvetica", sans-serif',
       h1: {
@@ -108,17 +111,13 @@ export const getTheme = (light: boolean) =>
         contrastText: '#ffffff',
       },
       type: light ? 'light' : 'dark',
-      colors: {
-        background: {
-          primary: light ? '#f1f0f5' : '#121212',
-          primaryLight: light ? '#e2e2e2' : '#1e2125',
-          secondary: light ? '#ffffff' : '#292d3e',
-        },
-        text: {
-          main: light ? '#111111' : '#ffffff',
-          primary: light ? '#1B3A57' : '#fafafa',
-          secondary: light ? '#476282' : '#b4b4b4',
-        },
+      text: {
+        primary: light ? '#111111' : '#ffffff',
+        secondary: light ? '#1B3A57' : '#fafafa',
+      },
+      background: {
+        default: light ? '#e2e2e2' : '#1e2125',
+        paper: light ? '#ffffff' : '#292d3e',
       },
       constants: {
         ...constants,

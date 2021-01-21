@@ -1,13 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import { unstable_createRoot as createRoot } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import URLS from 'URLS';
-import { SnackbarProvider } from './context/SnackbarContext';
-import { ThemeProvider } from './context/ThemeContext';
+import { SnackbarProvider } from 'context/SnackbarContext';
+import { ThemeProvider } from 'context/ThemeContext';
+import ErrorBoundary from 'ErrorBoundary';
 
 // Theme
-import './assets/css/index.css';
+import 'assets/css/index.css';
 
 // Project containers
 import Navigation from 'components/navigation/Navigation';
@@ -19,21 +19,23 @@ const Shoppinglist = lazy(() => import('containers/Shoppinglist'));
 
 const Application = () => {
   return (
-    <ThemeProvider>
-      <SnackbarProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Navigation />} path={'*'}>
-              <Route element={<Expenses />} path={URLS.expenses} />
-              <Route element={<Plan />} path={URLS.plan} />
-              <Route element={<Profile />} path={URLS.profile} />
-              <Route element={<Recipes />} path={URLS.recipes} />
-              <Route element={<Shoppinglist />} path={URLS.shoppinglist} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </SnackbarProvider>
-    </ThemeProvider>
+    <ErrorBoundary fallback={<p>Noe gikk galt</p>}>
+      <ThemeProvider>
+        <SnackbarProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Navigation />} path={'*'}>
+                <Route element={<Expenses />} path={URLS.expenses} />
+                <Route element={<Plan />} path={URLS.plan} />
+                <Route element={<Profile />} path={URLS.profile} />
+                <Route element={<Recipes />} path={URLS.recipes} />
+                <Route element={<Shoppinglist />} path={URLS.shoppinglist} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </SnackbarProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 };
 

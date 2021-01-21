@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 // Material UI Components
 import Button from '@material-ui/core/Button';

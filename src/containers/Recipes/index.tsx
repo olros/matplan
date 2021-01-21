@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from 'react';
 // import { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 

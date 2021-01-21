@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useEffect, Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 // Material UI Components
@@ -14,7 +13,7 @@ import BottomBar from './BottomBar';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    background: theme.palette.colors.background.primary,
+    background: theme.palette.type === 'light' ? '#f1f0f5' : '#121212',
   },
   main: {
     minHeight: '101vh',

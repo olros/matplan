@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useState, useContext, useCallback, useMemo, createContext, ReactNode } from 'react';
+import { useState, useContext, useCallback, useMemo, createContext, ReactNode } from 'react';
 import Snackbar from '../components/layout/Snackbar';
 
 type ContextProps = {

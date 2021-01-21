@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { IPlan, IDay } from 'types/Firestore';
@@ -41,7 +40,7 @@ const Day = ({ day, updateDay }: { day: IDay; updateDay: (plan: string, day: num
   useEffect(() => updateDay(plan, day.day), [plan]);
 
   return (
-    <React.Fragment>
+    <>
       <Typography variant='h3'>{getFormattedDate(numberToDate(day.day), false, true, true, true, false)}</Typography>
       <TextField
         fullWidth
@@ -50,7 +49,7 @@ const Day = ({ day, updateDay }: { day: IDay; updateDay: (plan: string, day: num
         value={plan}
         variant='outlined'
       />
-    </React.Fragment>
+    </>
   );
 };
 

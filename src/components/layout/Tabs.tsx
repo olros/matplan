@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React from 'react';
-
 // Material UI Components
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import MaterialTabs from '@material-ui/core/Tabs';
@@ -21,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none',
     fontSize: '0.9rem',
     minWidth: 92,
-    color: theme.palette.colors.text.primary,
+    color: theme.palette.text.secondary,
     '&:hover': {
       color: theme.palette.secondary.main,
       opacity: 1,

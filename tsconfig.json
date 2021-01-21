@@ -18,10 +18,14 @@
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "noEmit": true,
-    "jsx": "react",
+    "noImplicitAny": false,
+    "jsx": "react-jsx",
     "outDir": "./build",
     "baseUrl": "./src",
-    "typeRoots" : ["./node_modules/@types", "src/types"]
+    "typeRoots": [
+      "./node_modules/@types",
+      "src/types"
+    ]
   },
   "include": [
     "src"

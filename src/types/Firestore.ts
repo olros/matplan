@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 export interface IDay {
   day: number;
   plan: string;

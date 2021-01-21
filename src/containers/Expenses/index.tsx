@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import firebase, { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { IExpense, IExpense_month } from 'types/Firestore';
@@ -187,7 +186,7 @@ const Expenses = () => {
               {months
                 .sort((a, b) => b.month - a.month)
                 .map((month, index) => (
-                  <React.Fragment key={month.month}>
+                  <Fragment key={month.month}>
                     <ListItem
                       button
                       onClick={() => {
@@ -207,7 +206,7 @@ const Expenses = () => {
                         {month.expenses
                           .sort((a, b) => b.time.toMillis() - a.time.toMillis())
                           .map((expense, index) => (
-                            <React.Fragment key={index}>
+                            <Fragment key={index}>
                               <Divider component='li' variant='inset' />
                               <ListItem className={classes.nested} key={index}>
                                 <ListItemIcon>
@@ -220,12 +219,12 @@ const Expenses = () => {
                                   </IconButton>
                                 </ListItemSecondaryAction>
                               </ListItem>
-                            </React.Fragment>
+                            </Fragment>
                           ))}
                       </List>
                     </Collapse>
                     {index !== months.length - 1 && <Divider component='li' variant='inset' />}
-                  </React.Fragment>
+                  </Fragment>
                 ))}
             </List>
           </Paper>

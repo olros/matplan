@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 
 // Material UI Components
@@ -10,7 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     margin: 'auto',
     width: '100%',
-    backgroundColor: theme.palette.colors.background.secondary,
+    backgroundColor: theme.palette.background.paper,
     borderRadius: 10,
     padding: 20,
     marginBottom: 20,

@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import URLS from 'URLS';
 import { useAuth } from 'hooks/Auth';
@@ -26,14 +25,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 1000,
   },
   navbar: {
-    background: theme.palette.colors.background.primaryLight,
+    background: theme.palette.background.default,
     height: 64,
   },
   action: {
-    color: theme.palette.colors.text.secondary,
+    color: theme.palette.text.secondary,
     padding: 12,
     '&$selected': {
-      color: theme.palette.colors.text.main,
+      color: theme.palette.text.primary,
       paddingTop: 10,
     },
   },
