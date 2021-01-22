@@ -165,7 +165,7 @@ const RecipeDetails = () => {
     if (!auth || !recipeData) {
       return;
     }
-    const items = recipeData.ingredients.split(',').map((ingredient) => ({ what: ingredient, checked: false }));
+    const items = recipeData.ingredients.split(';').map((ingredient) => ({ what: ingredient, checked: false }));
     db.collection('shoppinglists')
       .doc(auth.uid)
       .update({ items: firebase.firestore.FieldValue.arrayUnion(...items) });
@@ -183,8 +183,8 @@ const RecipeDetails = () => {
               <Paper className={classes.paper} outlined>
                 <Typography variant='h3'>Ingredienser</Typography>
                 <List disablePadding>
-                  {recipeData.ingredients.split(',').map((ingredient, i) => (
-                    <ListItem divider={i !== recipeData.ingredients.split(',').length - 1} key={i}>
+                  {recipeData.ingredients.split(';').map((ingredient, i) => (
+                    <ListItem divider={i !== recipeData.ingredients.split(';').length - 1} key={i}>
                       <ListItemAvatar>
                         <Avatar className={classes.avatar}>
                           <FoodIcon />
@@ -208,8 +208,8 @@ const RecipeDetails = () => {
             <Paper className={classes.paper} outlined>
               <Typography variant='h2'>Steg</Typography>
               <List disablePadding>
-                {recipeData.steps.split(',').map((step, i) => (
-                  <ListItem divider={i !== recipeData.steps.split(',').length - 1} key={i}>
+                {recipeData.steps.split(';').map((step, i) => (
+                  <ListItem divider={i !== recipeData.steps.split(';').length - 1} key={i}>
                     <ListItemAvatar>
                       <Avatar className={classes.avatar}>{i + 1}</Avatar>
                     </ListItemAvatar>
