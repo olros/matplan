@@ -213,7 +213,7 @@ const RecipeDetails = () => {
                     <ListItemAvatar>
                       <Avatar className={classes.avatar}>{i + 1}</Avatar>
                     </ListItemAvatar>
-                    <ListItemText classes={{ primary: classes.primaryText }} primary={step} />
+                    <ListItemText primary={step} />
                   </ListItem>
                 ))}
               </List>
