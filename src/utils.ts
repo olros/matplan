@@ -59,10 +59,10 @@ const addLeadingZero = (i: number) => (i < 10 ? '0' + i : i);
 export const getFormattedDate = (dateObj: Date, time = true, day = true, date = true, month = true, year = true) => {
   return (
     (day ? getDayString(dateObj.getDay()) : '') +
-    (date ? ' ' + dateObj.getDate() : '') +
-    (month ? ' ' + getMonthString(dateObj.getMonth()) : '') +
-    (year ? ' ' + dateObj.getFullYear() : '') +
-    (time ? ' - ' + addLeadingZero(dateObj.getHours()) + ':' + addLeadingZero(dateObj.getMinutes()) : '')
+    (date ? ` ${dateObj.getDate()}.` : '') +
+    (month ? ` ${getMonthString(dateObj.getMonth())}` : '') +
+    (year ? ` ${dateObj.getFullYear()}` : '') +
+    (time ? ` - ${addLeadingZero(dateObj.getHours())}` + ':' + addLeadingZero(dateObj.getMinutes()) : '')
   );
 };
 

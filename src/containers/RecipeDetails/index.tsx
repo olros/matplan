@@ -5,7 +5,7 @@ import { useAuth } from 'hooks/Auth';
 import { useSnackbar } from 'context/SnackbarContext';
 import { IRecipes } from 'types/Firestore';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import URLS from 'URLS';
 
 // Material UI Components
@@ -17,6 +17,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import FoodIcon from '@material-ui/icons/FastfoodRounded';
 
 // Project components
@@ -49,11 +51,16 @@ const useStyles = makeStyles((theme) => ({
     },
     height: 50,
   },
+  deleteButton: {
+    color: theme.palette.error.main,
+    borderColor: theme.palette.error.main,
+    '&:hover': {
+      borderColor: theme.palette.error.light,
+    },
+    marginTop: 20,
+  },
   addButton: {
     marginBottom: 10,
-  },
-  primaryText: {
-    textTransform: 'capitalize',
   },
   img: {
     maxHeight: 200,
@@ -72,11 +79,13 @@ type IProps = {
 const Form = ({ id, recipe, setRecipeData }: IProps) => {
   const classes = useStyles();
   const [auth] = useAuth();
-  const { register, errors, handleSubmit } = useForm<Pick<IRecipes, 'img' | 'ingredients' | 'steps' | 'title'>>({ defaultValues: recipe });
+  const { control, register, errors, handleSubmit } = useForm<Pick<IRecipes, 'img' | 'ingredients' | 'steps' | 'title'>>({ defaultValues: recipe });
   const { showSnackbar } = useSnackbar();
+  const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const updateRecipe = async (data: Pick<IRecipes, 'img' | 'ingredients' | 'steps' | 'title'>) => {
+  const updateRecipe = async (data: Pick<IRecipes, 'public' | 'img' | 'ingredients' | 'steps' | 'title'>) => {
     if (!auth) {
       return;
     }
@@ -95,6 +104,17 @@ const Form = ({ id, recipe, setRecipeData }: IProps) => {
       setIsLoading(false);
     }
   };
+
+  const deleteRecipe = async () => {
+    try {
+      await db.collection('recipes').doc(id).delete();
+      showSnackbar('Oppskriften ble slettet');
+      navigate(URLS.recipes);
+    } catch (e) {
+      showSnackbar(e.message);
+    }
+  };
+
   return (
     <>
       <Button className={classes.button} color='primary' fullWidth onClick={() => setDialogOpen(true)} variant='outlined'>
@@ -102,6 +122,17 @@ const Form = ({ id, recipe, setRecipeData }: IProps) => {
       </Button>
       <Dialog onClose={() => setDialogOpen(false)} open={dialogOpen} titleText='Ny oppskrift'>
         <form onSubmit={handleSubmit(updateRecipe)}>
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name='public'
+                // eslint-disable-next-line react/prop-types
+                render={(props) => <Switch checked={props.value} color='primary' onChange={(e) => props.onChange(e.target.checked)} />}
+              />
+            }
+            label='Åpent tilgjengelig for alle'
+          />
           <TextField
             disabled={isLoading}
             errors={errors}
@@ -133,7 +164,19 @@ const Form = ({ id, recipe, setRecipeData }: IProps) => {
           <Button className={classes.button} color='primary' disabled={isLoading} fullWidth type='submit' variant='contained'>
             Lagre oppskrift
           </Button>
+          <Button
+            className={classnames(classes.button, classes.deleteButton)}
+            color='inherit'
+            disabled={isLoading}
+            fullWidth
+            onClick={() => setDeleteDialogOpen(true)}
+            variant='outlined'>
+            Slett oppskrift
+          </Button>
         </form>
+      </Dialog>
+      <Dialog confirmText='Ja' onClose={() => setDeleteDialogOpen(false)} onConfirm={deleteRecipe} open={deleteDialogOpen} titleText='Slett oppskrift'>
+        Er du sikker på at du vil slette oppskriften?
       </Dialog>
     </>
   );
@@ -155,7 +198,8 @@ const RecipeDetails = () => {
     db.collection('recipes')
       .doc(id)
       .get()
-      .then((snapshot) => (!subscribed || snapshot.exists ? setRecipeData(snapshot.data() as IRecipes) : navigate(URLS.recipes)));
+      .then((snapshot) => (!subscribed || snapshot.exists ? setRecipeData(snapshot.data() as IRecipes) : navigate(URLS.recipes)))
+      .catch(() => navigate(URLS.recipes));
     return () => {
       subscribed = false;
     };
@@ -190,7 +234,7 @@ const RecipeDetails = () => {
                           <FoodIcon />
                         </Avatar>
                       </ListItemAvatar>
-                      <ListItemText classes={{ primary: classes.primaryText }} primary={ingredient} />
+                      <ListItemText primary={ingredient} />
                     </ListItem>
                   ))}
                 </List>

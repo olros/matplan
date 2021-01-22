@@ -4,7 +4,7 @@ import { useAuth } from 'hooks/Auth';
 import { useSnackbar } from 'context/SnackbarContext';
 import { IRecipes } from 'types/Firestore';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import URLS from 'URLS';
 
 // Material UI Components
@@ -16,6 +16,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import FoodIcon from '@material-ui/icons/FastfoodRounded';
 
 // Project components
@@ -41,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
 const Form = () => {
   const classes = useStyles();
   const [auth] = useAuth();
-  const { register, errors, handleSubmit } = useForm<Pick<IRecipes, 'img' | 'ingredients' | 'steps' | 'title'>>();
+  const { control, register, errors, handleSubmit } = useForm<Pick<IRecipes, 'img' | 'ingredients' | 'steps' | 'title'>>();
   const { showSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const createRecipe = async (data: Pick<IRecipes, 'img' | 'ingredients' | 'steps' | 'title'>) => {
+  const createRecipe = async (data: Pick<IRecipes, 'public' | 'img' | 'ingredients' | 'steps' | 'title'>) => {
     if (!auth) {
       return;
     }
@@ -67,6 +69,17 @@ const Form = () => {
       </Button>
       <Dialog onClose={() => setDialogOpen(false)} open={dialogOpen} titleText='Ny oppskrift'>
         <form onSubmit={handleSubmit(createRecipe)}>
+          <FormControlLabel
+            control={
+              <Controller
+                control={control}
+                name='public'
+                // eslint-disable-next-line react/prop-types
+                render={(props) => <Switch checked={props.value} color='primary' onChange={(e) => props.onChange(e.target.checked)} />}
+              />
+            }
+            label='Åpent tilgjengelig for alle'
+          />
           <TextField
             disabled={isLoading}
             errors={errors}

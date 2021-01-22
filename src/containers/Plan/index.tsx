@@ -122,7 +122,10 @@ const Plan = () => {
     <Root>
       <Typography variant='h1'>Matplan</Typography>
       <Paper className={classes.paper} outlined>
-        <FormControlLabel control={<Switch checked={previous} name='checkedA' onChange={(e) => setPrevious(e.target.checked)} />} label='Vis tidligere dager' />
+        <FormControlLabel
+          control={<Switch checked={previous} color='primary' name='checkedA' onChange={(e) => setPrevious(e.target.checked)} />}
+          label='Vis tidligere dager'
+        />
         {days
           .filter((d) => (previous ? d.day < today : d.day >= today))
           .sort((a, b) => (previous ? b.day - a.day : a.day - b.day))
