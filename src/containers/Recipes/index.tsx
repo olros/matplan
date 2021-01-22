@@ -80,7 +80,7 @@ const Form = () => {
           <TextField
             disabled={isLoading}
             errors={errors}
-            helperText='Skill ingrediensene med komma'
+            helperText='Skill ingrediensene med semikolon (;)'
             label='Ingredienser'
             name='ingredients'
             register={register}
@@ -88,7 +88,7 @@ const Form = () => {
           <TextField
             disabled={isLoading}
             errors={errors}
-            helperText='Skill stegene med komma'
+            helperText='Skill stegene med semikolon (;)'
             label='Steg'
             multiline
             name='steps'
