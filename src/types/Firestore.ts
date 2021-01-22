@@ -42,9 +42,6 @@ export interface IRecipes {
   public: boolean;
   title: string;
   img?: string;
-  ingredients: {
-    name: string;
-    amount: number;
-  }[];
-  steps: string[];
+  ingredients: string;
+  steps: string;
 }

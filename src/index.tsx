@@ -15,6 +15,7 @@ const Expenses = lazy(() => import('containers/Expenses'));
 const Plan = lazy(() => import('containers/Plan'));
 const Profile = lazy(() => import('containers/Profile'));
 const Recipes = lazy(() => import('containers/Recipes'));
+const RecipeDetails = lazy(() => import('containers/RecipeDetails'));
 const Shoppinglist = lazy(() => import('containers/Shoppinglist'));
 
 const Application = () => {
@@ -29,6 +30,7 @@ const Application = () => {
                 <Route element={<Plan />} path={URLS.plan} />
                 <Route element={<Profile />} path={URLS.profile} />
                 <Route element={<Recipes />} path={URLS.recipes} />
+                <Route element={<RecipeDetails />} path={`${URLS.recipes}:id/`} />
                 <Route element={<Shoppinglist />} path={URLS.shoppinglist} />
               </Route>
             </Routes>

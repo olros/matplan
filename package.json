@@ -16,7 +16,7 @@
     "history": "^5.0.0",
     "react": "^0.0.0-experimental-27659559e",
     "react-dom": "^0.0.0-experimental-27659559e",
-    "react-hook-form": "^6.8.2",
+    "react-hook-form": "^6.14.2",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "^4.0.1",
     "react-test-renderer": "^16.13.1",
