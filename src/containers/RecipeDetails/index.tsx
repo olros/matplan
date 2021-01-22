@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { db } from '../../firebase';
+import classnames from 'classnames';
+import firebase, { db } from '../../firebase';
 import { useAuth } from 'hooks/Auth';
 import { useSnackbar } from 'context/SnackbarContext';
 import { IRecipes } from 'types/Firestore';
@@ -47,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 10,
     },
     height: 50,
+  },
+  addButton: {
+    marginBottom: 10,
   },
   primaryText: {
     textTransform: 'capitalize',
@@ -139,6 +143,7 @@ const RecipeDetails = () => {
   const classes = useStyles();
   const { id } = useParams();
   const [auth] = useAuth();
+  const { showSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [recipeData, setRecipeData] = useState<IRecipes | null>(null);
 
@@ -155,6 +160,17 @@ const RecipeDetails = () => {
       subscribed = false;
     };
   }, [auth, id, navigate]);
+
+  const addIngredientsToShoppingList = () => {
+    if (!auth || !recipeData) {
+      return;
+    }
+    const items = recipeData.ingredients.split(',').map((ingredient) => ({ what: ingredient, checked: false }));
+    db.collection('shoppinglists')
+      .doc(auth.uid)
+      .update({ items: firebase.firestore.FieldValue.arrayUnion(...items) });
+    showSnackbar('Ingrediensene ble lagt til i handlelisten din');
+  };
 
   return (
     <Root>
@@ -179,6 +195,14 @@ const RecipeDetails = () => {
                   ))}
                 </List>
               </Paper>
+              <Button
+                className={classnames(classes.button, classes.addButton)}
+                color='primary'
+                fullWidth
+                onClick={addIngredientsToShoppingList}
+                variant='contained'>
+                Legg til ingredienser i handlelisten
+              </Button>
               {auth?.uid === recipeData.owner && <Form id={id} recipe={recipeData} setRecipeData={setRecipeData} />}
             </div>
             <Paper className={classes.paper} outlined>
